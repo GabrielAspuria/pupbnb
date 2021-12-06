@@ -18,7 +18,7 @@ const removeUser = () => {
 }
 
 
-export const login = (credential, password) => async (dispatch) => {
+export const login = ({credential, password}) => async (dispatch) => {
     const res = await csrfFetch('/api/session', {
         method: "POST",
         body: JSON.stringify({
