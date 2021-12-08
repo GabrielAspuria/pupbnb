@@ -18,8 +18,12 @@ function SpotsPage() {
         <main>
             <div>
                 {Object.values(spots).map((spot) => (
-                    <NavLink to='/spots' key={spot.id} className='allspots'><img src={spot.photos}></img></NavLink>
-                    // <NavLink to={`/spots/${spot.id}`} key={spot.id} className='spot'><img src={spot.photos}></img></NavLink>
+                    // <NavLink to='/spots' key={spot.id} className='allspots'><img src={spot.photos}></img></NavLink>
+                    <NavLink to={`/spots/${spot.id}`} key={spot.id} className='allspots'>
+                        <div>{spot.name}</div>
+                        <img src={spot.photos}></img>
+
+                    </NavLink>
                     ))}
             </div>
         </main>

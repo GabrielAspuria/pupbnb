@@ -14,7 +14,15 @@ module.exports = {
 
 
       return queryInterface.bulkInsert('Spots', [
-        {userId: 2, name: 'Floor Blanket', description: fbDescription, features: 'Warm, next to owner, mobile', price: 3, rating: 5, photos: "https://res.cloudinary.com/gabrielaspuria/image/upload/v1638824966/pupbnb/floorblanket1_exfr5z.png", updatedAt: new Date(), createdAt: new Date()},
+        {userId: 2,
+          name: 'Floor Blanket',
+          description: fbDescription,
+          features: 'Warm, next to owner, mobile',
+          price: 3,
+          rating: 5,
+          photos: "https://res.cloudinary.com/gabrielaspuria/image/upload/v1638824966/pupbnb/floorblanket1_exfr5z.png",
+          updatedAt: new Date(),
+          createdAt: new Date()},
         {userId: 2, name: 'Small Dog Bed', description: sdbDescription, features:'Comfortable, mobile, definitely not destructible', price: 1, rating: 1, photos:"https://res.cloudinary.com/gabrielaspuria/image/upload/v1638825297/pupbnb/smalldogbed_orp7rs.png", updatedAt: new Date(), createdAt: new Date() }
 
       ], {});

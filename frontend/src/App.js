@@ -26,10 +26,10 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
-          <Route path='/spots'>
+          <Route exact path='/spots'>
             <SpotsPage />
           </Route>
-          <Route path={'/spots/id'}>
+          <Route path={'/spots/:id'}>
             <SpotPage />
           </Route>
         </Switch>

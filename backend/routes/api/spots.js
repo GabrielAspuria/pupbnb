@@ -1,21 +1,25 @@
 const express = require('express')
-const { csrfProtection, asyncHandler } = require('../../utils/util')
+const { asyncHandler } = require('../../utils/util')
 const db = require('../../db/models')
 const { Spot, User, Review } = db
-const { restoreUser, requireAuth, setTokenCookie} = require("../../utils/auth")
-const { check, validationResult } = require('express-validator')
-const e = require('express')
+const { restoreUser} = require("../../utils/auth")
 
 const router = express.Router();
 
 router.get('/', asyncHandler(async (req, res) => {
-        const spots = await Spot.findAll();
-        return res.json(spots)
+        const all = await Spot.findAll();
+        return res.json(all)
 }))
 
-router.get('/:id', asyncHandler(async (req, res) => {
-        const spot = await Spot.findByPk();
-        return res.json(spot)
+router.get('/:id(\\d+)', restoreUser, asyncHandler(async (req, res, next) => {
+        const { spot } = req;
+        const spotId = req.params.id
+
+        if (spot) {
+                const place = await Spot.findByPk(spotId)
+                return res.json(place)
+        }
+
 }))
 
 
