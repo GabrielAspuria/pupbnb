@@ -19,6 +19,28 @@ const validateLogin = [
     handleValidationErrors
   ];
 
+// Demouser
+
+router.get('/demo', asyncHandler(async(req, res, next) => {
+  const user = await User.login({
+    credential: "demo@user.io",
+    password: 'password'
+  });
+  if (!user) {
+    const err = new Error('Login failed');
+    err.status = 401;
+    err.title = 'Login failed';
+    err.errors = ['The provided credentials were invalid.'];
+    return next(err);
+  }
+
+  await setTokenCookie(res, user);
+
+  return res.json({
+    user
+  })
+}))
+
 // Log in
 router.post(
     '/',
