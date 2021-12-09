@@ -10,9 +10,21 @@ function SpotsPage() {
     const dispatch = useDispatch();
     const spots = useSelector((state) => state.spot);
 
+
     useEffect(() => {
         dispatch(getSpots());
     }, [dispatch]);
+
+    const sessionUser = useSelector(state => state.session.user);
+
+    let addSpot;
+    if (sessionUser) {
+        addSpot = (
+            <>
+                <NavLink to='/spots/add'>Add Spot</NavLink>
+            </>
+        )
+    }
 
     return (
         <main>
@@ -25,6 +37,9 @@ function SpotsPage() {
 
                     </NavLink>
                     ))}
+            </div>
+            <div>
+                <NavLink to='/spots/add'>Add Spot</NavLink>
             </div>
         </main>
     )

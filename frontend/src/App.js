@@ -29,6 +29,9 @@ function App() {
           <Route exact path='/spots'>
             <SpotsPage />
           </Route>
+          <Route path='/spots/add'>
+            <SpotsPage />
+          </Route>
           <Route path={'/spots/:id'}>
             <SpotPage />
           </Route>

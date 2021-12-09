@@ -14,7 +14,8 @@ module.exports = {
 
 
       return queryInterface.bulkInsert('Spots', [
-        {userId: 2,
+        {
+          userId: 2,
           name: 'Floor Blanket',
           description: fbDescription,
           features: 'Warm, next to owner, mobile',

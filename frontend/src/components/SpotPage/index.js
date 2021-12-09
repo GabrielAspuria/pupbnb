@@ -5,21 +5,24 @@ import { NavLink, useParams, useHistory, Redirect } from 'react-router-dom';
 import { getSpot } from '../../store/spot';
 import * as sessionActions from '../../store/session'
 
-
 function SpotPage() {
     const dispatch = useDispatch();
     const spot = useSelector((state) => state.spot);
+    // console.log(spot, 'HELLO')
     const [isLoaded, setIsLoaded] = useState(false);
     useEffect(() => {
-      dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
+        dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
     }, [dispatch]);
 
 
+    const {id} = useParams()
+
     useEffect(() => {
-        dispatch(getSpot());
+        dispatch(getSpot(id));
     }, [dispatch])
 
     const sessionUser = useSelector((state) => state.session.user)
+    // console.log(sessionUser.username, "YOYOYO")
 
     if (!sessionUser) return <Redirect to='/'/>
 
@@ -33,6 +36,7 @@ function SpotPage() {
                         <img src={spot.photos}></img>
                         <div>{spot.description}</div>
                         <div>{spot.features}</div>
+                        {/* <div>{spot.user.username}</div> */}
                     </NavLink>
                 ))}
             </div>
