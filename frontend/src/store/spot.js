@@ -16,9 +16,9 @@ const getNote = (spot) => ({
     spot
 })
 
-const add = (add) => ({
+const addOneSpot = (spot) => ({
     type: ADD_SPOT,
-    add
+    spot
 })
 
 // const edit = (edit) => ({
@@ -51,20 +51,21 @@ export const getSpot = (id) => async (dispatch) => {
     }
 }
 
-export const addSpot = () => async (dispatch) => {
-    const res = await csrfFetch('/api/spots/add')
+export const addSpot = (data) => async (dispatch) => {
+    const res = await csrfFetch(`/api/spots`, {
+        method: "POST",
+        body: JSON.stringify(data)
+    })
 
     if (res.ok) {
         const data = await res.json();
-        dispatch(add());
-        return data
+        dispatch(addOneSpot(data));
     }
+    return res
 }
 
 export const deleteSpot = (id) => async (dispatch) => {
-    const res = await csrfFetch(`/api/spots/${id}`, {
-        method: 'DELETE'
-    })
+    const res = await csrfFetch(`/api/spots/${id}`, {method: 'DELETE'})
 
     if (res.ok) dispatch(remove(id))
 }
@@ -86,7 +87,7 @@ export default function spotReducer(state = {}, action) {
 
         case ADD_SPOT:{
             const newState = {};
-            newState[action.add.id] = action.spot;
+            newState[action.spot.id] = action.spot;
             return newState;
         }
 

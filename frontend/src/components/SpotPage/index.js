@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, useParams, Redirect } from 'react-router-dom';
+import { useParams, Redirect } from 'react-router-dom';
 import { getSpot, deleteSpot } from '../../store/spot';
 import * as sessionActions from '../../store/session'
 
@@ -12,7 +12,6 @@ function SpotPage() {
     const features = Object.values(spot).map(spot => spot.features.split(','))
     const eachFeature = {...features[0]}
 
-    console.log([eachFeature][0][0], "YO")
     const [isLoaded, setIsLoaded] = useState(false);
     useEffect(() => {
         dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
@@ -25,6 +24,11 @@ function SpotPage() {
         dispatch(getSpot(id));
     }, [dispatch])
 
+
+    const handleDelete = (id) => {
+        dispatch(deleteSpot(id))
+    }
+
     const sessionUser = useSelector((state) => state.session.user)
 
     let removeSpot;
@@ -32,7 +36,7 @@ function SpotPage() {
     if (sessionUser.username == user[0]) {
         removeSpot = (
             <>
-            <button className='button' onClick={() => deleteSpot(id) }>Delete</button>
+            <button className='button' onClick={() => handleDelete(id) }>Delete</button>
             </>
         )
     }
@@ -54,9 +58,9 @@ function SpotPage() {
                     <div>{spot.description}</div>
                     <ul>
                         Features:
-                        <li>{[eachFeature][0][0]}</li>
-                        <li>{[eachFeature][0][1]}</li>
-                        <li>{[eachFeature][0][2]}</li>
+                        <li key={'1'}>{[eachFeature][0][0]}</li>
+                        <li key={'2'}>{[eachFeature][0][1]}</li>
+                        <li key={'3'}>{[eachFeature][0][2]}</li>
                     </ul>
                     <div>Reviews:</div>
                     <div>{removeSpot}</div>

@@ -3,7 +3,7 @@ const { check } = require('express-validator')
 const { asyncHandler } = require('../../utils/util')
 const db = require('../../db/models')
 const { Spot, User, Review } = db
-const { restoreUser} = require("../../utils/auth")
+const { restoreUser, requireAuth} = require("../../utils/auth")
 const { handleValidationErrors } = require('../../utils/validation')
 // const { json } = require('sequelize/types')
 
@@ -32,39 +32,37 @@ router.get('/:id(\\d+)', restoreUser, asyncHandler(async (req, res, next) => {
   return res.json(place)
 }))
 
-router.post('/add', restoreUser, spotValidator, asyncHandler( async(req, res, next) => {
-  const { user } = req;
+router.post('/',requireAuth, spotValidator, asyncHandler( async(req, res, next) => {
   const {
+    userId,
     name,
     description,
     features,
+    price,
     rating,
     photos
    } = req.body
 
-   const userId = user.dataValues.id;
-
    if (user) {
-    const newSpot = await Spot.create({ userId, name, description, features, rating, photos})
-    return res.json(newSpot)
+    const newSpot = await Spot.create({ userId: req.user.id, name, description, features, price, rating, photos})
+    return res.status(201).json(newSpot)
    }
 
 }))
 
-router.delete('/:id(//d+)', async (req, res, next) => {
+router.delete('/:id(\\d+)', async (req, res, next) => {
   const { user } = req;
-  console.log(user, "USER")
   const userId = user.dataValues.id;
   const spotId = req.params.id;
 
-  if (!user) {
+  if (true) {
     const deleteSpot = await Spot.findByPk(spotId, {include: User});
     console.log(deleteSpot,"YUH")
     console.log(userId, "YEET")
-    // if(+deleteSpot.userId === userId) {
+    if(+deleteSpot.userId === userId) {
       await deleteSpot.destroy();
       return res.json();
-    // }
+    }
   }
 })
 

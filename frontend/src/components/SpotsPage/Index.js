@@ -17,11 +17,11 @@ function SpotsPage() {
     const sessionUser = useSelector(state => state.session.user);
 
 
-    let addSpot;
+    let addNewSpot;
     if (sessionUser) {
-        addSpot = (
+        addNewSpot = (
             <>
-                <NavLink to='/spots/add'>Add Spot</NavLink>
+                <NavLink to='/spots'>Add Spot</NavLink>
             </>
         )
     }
@@ -29,6 +29,9 @@ function SpotsPage() {
 
     return (
         <main>
+            <div>
+                {addNewSpot}
+            </div>
             <div>
                 {Object.values(spots).map((spot) => (
                     // <NavLink to='/spots' key={spot.id} className='allspots'><img src={spot.photos}></img></NavLink>
@@ -38,9 +41,6 @@ function SpotsPage() {
 
                     </NavLink>
                     ))}
-            </div>
-            <div>
-                {addSpot}
             </div>
         </main>
     )
