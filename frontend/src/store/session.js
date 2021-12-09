@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux"
 import { csrfFetch } from "./csrf"
 
 export const SET_SESSION_USER = 'session/SET_SESSION_USER'

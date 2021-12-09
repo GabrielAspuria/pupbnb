@@ -24,7 +24,7 @@ module.exports = {
       },
       cleanliness: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER(5)
       },
       accuracy: {
         allowNull: false,

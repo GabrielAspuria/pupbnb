@@ -23,7 +23,7 @@ const validateLogin = [
 
 router.get('/demo', asyncHandler(async(req, res, next) => {
   const user = await User.login({
-    credential: "demo@user.io",
+    credential: "demouser@demo.com",
     password: 'password'
   });
   if (!user) {

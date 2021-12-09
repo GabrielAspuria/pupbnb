@@ -4,9 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import './LoginForm.css';
 
-const Button = `
-  border: none;
-`;
 
 function LoginFormPage() {
   const dispatch = useDispatch();

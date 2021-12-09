@@ -1,7 +1,7 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, useParams, useHistory, Redirect } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { getSpots } from '../../store/spot';
 import './SpotsPage.css'
 
@@ -10,12 +10,12 @@ function SpotsPage() {
     const dispatch = useDispatch();
     const spots = useSelector((state) => state.spot);
 
-
     useEffect(() => {
         dispatch(getSpots());
     }, [dispatch]);
 
     const sessionUser = useSelector(state => state.session.user);
+
 
     let addSpot;
     if (sessionUser) {
@@ -25,6 +25,7 @@ function SpotsPage() {
             </>
         )
     }
+
 
     return (
         <main>
@@ -39,7 +40,7 @@ function SpotsPage() {
                     ))}
             </div>
             <div>
-                <NavLink to='/spots/add'>Add Spot</NavLink>
+                {addSpot}
             </div>
         </main>
     )

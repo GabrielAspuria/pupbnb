@@ -16,17 +16,19 @@ const getNote = (spot) => ({
     spot
 })
 
-const addSpot = (add) => ({
+const add = (add) => ({
     type: ADD_SPOT,
     add
 })
 
-const editSpot = () => ({
-    type: EDIT_SPOT,
-})
+// const edit = (edit) => ({
+//     type: EDIT_SPOT,
+//     edit
+// })
 
-const deleteSpot = () => ({
+const remove = (remove) => ({
     type: DELETE_SPOT,
+    remove
 })
 
 export const getSpots = () => async (dispatch) => {
@@ -49,6 +51,24 @@ export const getSpot = (id) => async (dispatch) => {
     }
 }
 
+export const addSpot = () => async (dispatch) => {
+    const res = await csrfFetch('/api/spots/add')
+
+    if (res.ok) {
+        const data = await res.json();
+        dispatch(add());
+        return data
+    }
+}
+
+export const deleteSpot = (id) => async (dispatch) => {
+    const res = await csrfFetch(`/api/spots/${id}`, {
+        method: 'DELETE'
+    })
+
+    if (res.ok) dispatch(remove(id))
+}
+
 export default function spotReducer(state = {}, action) {
     switch(action.type) {
         case GET_ALL:
@@ -60,13 +80,25 @@ export default function spotReducer(state = {}, action) {
 
         case GET_SPOT:{
             const newState = {};
-            newState[action.spot.id] = action.spot
+            newState[action.spot.id] = action.spot;
             return newState;
         }
 
         case ADD_SPOT:{
             const newState = {};
-            newState[action.add.id] = action.spot
+            newState[action.add.id] = action.spot;
+            return newState;
+        }
+
+        case EDIT_SPOT:{
+            const newState = {};
+            newState[action.edit.id] = action.spot;
+            return newState;
+        }
+
+        case DELETE_SPOT:{
+            const newState = {};
+            newState[action.remove.id] = action.spot;
             return newState;
         }
 

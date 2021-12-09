@@ -29,7 +29,7 @@ module.exports = {
       },
       price: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.TEXT
       },
       photos: {
         type: Sequelize.TEXT
