@@ -1,4 +1,5 @@
 import { csrfFetch } from "./csrf";
+import { Redirect } from "react-router-dom";
 
 const GET_ALL = 'spots/GET_ALL'
 const GET_SPOT = 'spot/GET_SPOT'
@@ -42,12 +43,13 @@ export const getSpots = () => async (dispatch) => {
 
 export const getSpot = (id) => async (dispatch) => {
     const res = await csrfFetch(`/api/spots/${id}`)
-
-    if (res.ok) {
-        const data = await res.json();
-        console.log(data)
-        dispatch(getNote(data))
-        return data
+    const spot = await res.json()
+    if (spot) {
+        if (res.ok) {
+            dispatch(getNote(spot))
+            return <Redirect to='/spots'/>
+        }
+        
     }
 }
 
@@ -66,9 +68,9 @@ export const addSpot = (data) => async (dispatch) => {
 
 export const deleteSpot = (id) => async (dispatch) => {
     const res = await csrfFetch(`/api/spots/${id}`, {method: 'DELETE'})
-
+    
+    const spot = await res.json()
     if (res.ok) {
-        const spot = await res.json()
         dispatch(remove(spot))
     }
 }
@@ -103,7 +105,7 @@ export default function spotReducer(state = {}, action) {
         case DELETE_SPOT:{
             const newState = {...state};
             // newState[action.remove.id] = action.spot;
-            delete newState[action.remove.id]
+            delete newState[action.remove]
             return newState;
         }
 

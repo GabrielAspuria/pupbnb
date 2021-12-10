@@ -36,16 +36,19 @@ function SpotPage() {
 
     const handleDelete = (id) => {
         dispatch(deleteSpot(id))
+        history.push('/spots')
     }
 
     const sessionUser = useSelector((state) => state.session.user)
 
     let removeSpot;
-
+    console.log(sessionUser.username)
+    console.log(currUser)
     if (sessionUser.username == currUser[0]) {
         removeSpot = (
             <>
             <button className='button' onClick={() => handleDelete(id) }>Delete</button>
+            {/* <Redirect to='/spots'/> */}
             </>
         )
     }
