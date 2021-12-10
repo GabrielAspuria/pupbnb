@@ -1,16 +1,25 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams, Redirect } from 'react-router-dom';
+import { useParams, Redirect, useHistory} from 'react-router-dom';
 import { getSpot, deleteSpot } from '../../store/spot';
 import * as sessionActions from '../../store/session'
 
 function SpotPage() {
     const dispatch = useDispatch();
+    const history = useHistory();
     const spot = useSelector((state) => state.spot);
-    const user = Object.values(spot).map(spot => spot.User.username)
+    const currUser = Object.values(spot).map(spot => spot.User.username)
     const features = Object.values(spot).map(spot => spot.features.split(','))
     const eachFeature = {...features[0]}
+
+    const [name, setName] = useState('');
+    const [description, setDescription] = useState('');
+    const [features, setFeatures] = useState('');
+    const [price, setPrice] = useState('');
+    const [rating, setRating] = useState('');
+    const [photos, setPhotos] = useState('');
+
 
     const [isLoaded, setIsLoaded] = useState(false);
     useEffect(() => {
@@ -33,7 +42,7 @@ function SpotPage() {
 
     let removeSpot;
 
-    if (sessionUser.username == user[0]) {
+    if (sessionUser.username == currUser[0]) {
         removeSpot = (
             <>
             <button className='button' onClick={() => handleDelete(id) }>Delete</button>
