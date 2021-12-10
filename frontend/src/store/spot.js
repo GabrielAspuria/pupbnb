@@ -106,7 +106,6 @@ export default function spotReducer(state = {}, action) {
 
         case DELETE_SPOT:{
             const newState = {...state};
-            // newState[action.remove.id] = action.spot;
             delete newState[action.remove.id]
             return newState;
         }

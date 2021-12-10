@@ -13,13 +13,6 @@ function SpotPage() {
     const features = Object.values(spot).map(spot => spot.features.split(','))
     const eachFeature = {...features[0]}
 
-    const [name, setName] = useState('');
-    const [description, setDescription] = useState('');
-    const [bnbFeatures, setBnbFeatures] = useState('');
-    const [price, setPrice] = useState('');
-    const [rating, setRating] = useState('');
-    const [photos, setPhotos] = useState('');
-
 
     const [isLoaded, setIsLoaded] = useState(false);
     useEffect(() => {
