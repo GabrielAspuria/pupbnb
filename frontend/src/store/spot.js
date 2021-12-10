@@ -47,7 +47,6 @@ export const getSpot = (id) => async (dispatch) => {
     if (spot) {
         if (res.ok) {
             dispatch(getNote(spot))
-            // return <Redirect to='/spots'/  >
         }
         
     }
@@ -56,14 +55,17 @@ export const getSpot = (id) => async (dispatch) => {
 export const addSpot = (data) => async (dispatch) => {
     const res = await csrfFetch(`/api/spots`, {
         method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+          },
         body: JSON.stringify(data)
     })
 
     if (res.ok) {
-        const data = await res.json();
-        dispatch(addOneSpot(data));
+        const newSpot = await res.json();
+        dispatch(addOneSpot(newSpot));
+        return res
     }
-    return res
 }
 
 export const deleteSpot = (id) => async (dispatch) => {

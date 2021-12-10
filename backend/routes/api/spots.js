@@ -33,20 +33,8 @@ router.get('/:id(\\d+)', restoreUser, asyncHandler(async (req, res, next) => {
 }))
 
 router.post('/',requireAuth, spotValidator, asyncHandler( async(req, res, next) => {
-  const {
-    userId,
-    name,
-    description,
-    features,
-    price,
-    rating,
-    photos
-   } = req.body
-
-   if (user) {
-    const newSpot = await Spot.create({ userId: req.user.id, name, description, features, price, rating, photos})
-    return res.status(201).json(newSpot)
-   }
+  const spot = await Spot.create(req.body)
+  return res.json(spot)
 
 }))
 
@@ -56,7 +44,6 @@ router.delete('/:id', requireAuth, asyncHandler(async (req, res, next) => {
 
   if (user) {
     const deleteSpot = await Spot.findByPk(spotId);
-    console.log(deleteSpot,"YUH")
     await deleteSpot.destroy();
     return res.json({});
   }
