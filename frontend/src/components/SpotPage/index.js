@@ -15,7 +15,7 @@ function SpotPage() {
 
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
-    const [features, setFeatures] = useState('');
+    const [bnbFeatures, setBnbFeatures] = useState('');
     const [price, setPrice] = useState('');
     const [rating, setRating] = useState('');
     const [photos, setPhotos] = useState('');

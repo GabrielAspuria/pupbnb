@@ -50,20 +50,16 @@ router.post('/',requireAuth, spotValidator, asyncHandler( async(req, res, next) 
 
 }))
 
-router.delete('/:id(\\d+)', async (req, res, next) => {
+router.delete('/:id', requireAuth, asyncHandler(async (req, res, next) => {
   const { user } = req;
-  const userId = user.dataValues.id;
   const spotId = req.params.id;
 
-  if (true) {
-    const deleteSpot = await Spot.findByPk(spotId, {include: User});
+  if (user) {
+    const deleteSpot = await Spot.findByPk(spotId);
     console.log(deleteSpot,"YUH")
-    console.log(userId, "YEET")
-    if(+deleteSpot.userId === userId) {
-      await deleteSpot.destroy();
-      return res.json();
-    }
+    await deleteSpot.destroy();
+    return res.json({});
   }
-})
+}))
 
 module.exports = router
