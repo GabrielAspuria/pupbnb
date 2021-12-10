@@ -47,7 +47,7 @@ export const getSpot = (id) => async (dispatch) => {
     if (spot) {
         if (res.ok) {
             dispatch(getNote(spot))
-            return <Redirect to='/spots'/>
+            // return <Redirect to='/spots'/  >
         }
         
     }
@@ -105,7 +105,7 @@ export default function spotReducer(state = {}, action) {
         case DELETE_SPOT:{
             const newState = {...state};
             // newState[action.remove.id] = action.spot;
-            delete newState[action.remove]
+            delete newState[action.remove.id]
             return newState;
         }
 
