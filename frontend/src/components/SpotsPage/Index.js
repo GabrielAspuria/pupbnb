@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { getSpots } from '../../store/spot';
 import './SpotsPage.css'
+import CreateSpot from '../SpotPage(create)/Index';
 
 
 function SpotsPage() {
@@ -14,6 +15,8 @@ function SpotsPage() {
         dispatch(getSpots());
     }, [dispatch]);
 
+    const [form, setForm] = useState(false)
+
     const sessionUser = useSelector(state => state.session.user);
 
 
@@ -21,9 +24,15 @@ function SpotsPage() {
     if (sessionUser) {
         addNewSpot = (
             <>
-                <NavLink to='/spots'>Add Spot</NavLink>
+                <button onClick={() => setForm(true)}>Add Spot</button>
+
             </>
         )
+    }
+
+    let addForm = null;
+    if (form) {
+        addForm = <CreateSpot />
     }
 
 
@@ -31,6 +40,8 @@ function SpotsPage() {
         <main>
             <div>
                 {addNewSpot}
+                {/* <button onClick={() => setForm(true)}>Add Spot</button> */}
+                {addForm}
             </div>
             <div>
                 {Object.values(spots).map((spot) => (

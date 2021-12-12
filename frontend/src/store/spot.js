@@ -48,7 +48,7 @@ export const getSpot = (id) => async (dispatch) => {
         if (res.ok) {
             dispatch(getNote(spot))
         }
-        
+
     }
 }
 
@@ -70,7 +70,7 @@ export const addSpot = (data) => async (dispatch) => {
 
 export const deleteSpot = (id) => async (dispatch) => {
     const res = await csrfFetch(`/api/spots/${id}`, {method: 'DELETE'})
-    
+
     const spot = await res.json()
     if (res.ok) {
         dispatch(remove(spot))
@@ -78,34 +78,30 @@ export const deleteSpot = (id) => async (dispatch) => {
 }
 
 export default function spotReducer(state = {}, action) {
+    const newState = {...state};
     switch(action.type) {
         case GET_ALL:
-            const newState = {};
             action.all.forEach(all => {
                 newState[all.id] = all;
             });
             return newState;
 
         case GET_SPOT:{
-            const newState = {};
             newState[action.spot.id] = action.spot;
             return newState;
         }
 
         case ADD_SPOT:{
-            const newState = {};
             newState[action.spot.id] = action.spot;
             return newState;
         }
 
         case EDIT_SPOT:{
-            const newState = {};
             newState[action.edit.id] = action.spot;
             return newState;
         }
 
         case DELETE_SPOT:{
-            const newState = {...state};
             delete newState[action.remove.id]
             return newState;
         }
