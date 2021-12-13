@@ -1,3 +1,93 @@
 img {
     width: 200px;
+    height: 200px;
+    border-radius: 10px;
+}
+
+.spotGrid {
+    display: grid;
+    grid-template-columns: 200px 200px;
+    grid-gap: 25px;
+    justify-content: center;
+    text-align: left;
+    margin-top: 50px;
+}
+
+.addSpotInfo {
+    text-align: center;
+}
+
+#submitButton {
+    margin-left: 25px;
+}
+
+#addSpotButton {
+    margin-bottom: 10px;
+}
+
+/* --------------- */
+/* SPOT PAGE */
+/* --------------- */
+
+.spotInfoContainer {
+    text-align: center;
+    /* color: black; */
+}
+
+.spotInfo {
+    display: inline-block;
+    text-align: left;
+    width: 500px;
+}
+
+
+.spotHeader {
+    margin-top: 50px;
+    text-align: center;
+}
+
+#hrLine {
+    margin: 25px;
+}
+
+#description, #features, #reviews {
+    font-size: 20px;
+    color: #d1d1d1;
+    margin-bottom: 5px;
+}
+
+#descriptionData, #featuresData {
+    margin-bottom: 25px;
+}
+
+.featureList {
+    text-align: left;
+}
+
+.reviewList {
+    text-align: left;
+}
+
+.testimonial {
+    margin-top: 10px;
+    margin-bottom: 25px;
+    display: flex;
+}
+
+#experienceData {
+    font-weight: normal;
+    width: 300px;
+}
+
+#reviewImage {
+    width: 100px;
+    height: 100px;
+}
+
+.addEditReviewSection {
+    text-align: center;
+}
+
+.addReviewSection {
+    margin-bottom: 10px;
 }

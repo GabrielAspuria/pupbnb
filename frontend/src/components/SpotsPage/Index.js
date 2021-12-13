@@ -24,8 +24,7 @@ function SpotsPage() {
     if (sessionUser) {
         addNewSpot = (
             <>
-                <button onClick={() => setForm(true)}>Add Spot</button>
-
+                <button id='addSpotButton' onClick={() => setForm(true)}>Add Spot</button>
             </>
         )
     }
@@ -38,16 +37,15 @@ function SpotsPage() {
 
     return (
         <main>
-            <div>
+            <div className='addSpotInfo'>
                 {addNewSpot}
                 {addForm}
             </div>
-            <div>
+            <div className='spotGrid'>
                 {Object.values(spots).map((spot) => (
                     <NavLink to={`/spots/${spot.id}`} key={spot.id} className='allspots'>
+                        <div><img src={spot.photos}></img></div>
                         <div>{spot.name}</div>
-                        <img src={spot.photos}></img>
-
                     </NavLink>
                     ))}
             </div>

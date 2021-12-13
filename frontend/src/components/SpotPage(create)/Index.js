@@ -37,7 +37,7 @@ const CreateSpot = () => {
             <input placeholder='features' value={features} onChange={(e) => setFeatures(e.target.value)}></input>
             <input placeholder='price' value={price} onChange={(e) => setPrice(e.target.value)}></input>
             <input placeholder='photos' value={photos} onChange={(e) => setPhotos(e.target.value)}></input>
-            <button>Submit</button>
+            <button id='submitButton'>Submit</button>
         </form>
     )
 }

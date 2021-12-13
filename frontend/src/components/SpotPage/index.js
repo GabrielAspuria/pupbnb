@@ -8,6 +8,7 @@ import EditSpotForm from '../SpotPage(edit)';
 import ReviewForm from '../ReviewForm/Index';
 import AddReviewForm from '../Review(create)/Index';
 import EditReviewForm from '../Review(edit)/Index';
+import "../SpotsPage/SpotsPage.css"
 
 function SpotPage() {
     const dispatch = useDispatch();
@@ -107,7 +108,7 @@ function SpotPage() {
     if (!sessionUser) return <Redirect to='/'/>
 
     let features = (<ul>
-        {spot.features.split(',').map(feature => <li>{feature}</li>)}</ul>)
+        {spot.features.split(',').map(feature => <li className='featureList'>✓ {feature}</li>)}</ul>)
 
 
     return (
@@ -115,29 +116,39 @@ function SpotPage() {
             {isLoaded && (
             <div>
                     <>
-                    <div>Owner: {spot.User.username}</div>
-                    <div>{spot.name}</div>
-                    <img src={spot.photos}></img>
-                    <div>Description:</div>
-                    <div>{spot.description}</div>
-                    {features}
-                    <div>Reviews:</div>
-                    <div>
-                    <ReviewForm />
+                    <div className='spotHeader'>
+                        <img src={spot.photos}></img>
+                        <div>👤 {spot.User.username} &nbsp;&nbsp;&nbsp; 🏠 {spot.name} </div>
+                        <div></div>
+                        <hr id='hrLine'></hr>
                     </div>
-                    <div>
-                        {addReview}
-                        {addReviewForm}
+                    <div className='spotInfoContainer'>
+                        <div className='spotInfo'>
+                            <div id='description'>Description:</div>
+                            <div id='descriptionData'>{spot.description}</div>
+                            <div id='features'> Features: </div>
+                            <div id='featuresData'>{features}</div>
+                            <div id='reviews'>Reviews:</div>
+                            <div>
+                            <ReviewForm />
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        {editReview}
-                        {editReviewForm}
+                    <div className='addEditReviewSection'>
+                        <div className='addReviewSection'>
+                            {addReview}
+                            {addReviewForm}
+                        </div>
+                        <div>
+                            {editReview}
+                            {editReviewForm}
+                        </div>
+                        <div>
+                            {editASpot}
+                            {editForm}
+                        </div>
+                        <div>{removeSpot}</div>
                     </div>
-                    <div>
-                        {editASpot}
-                        {editForm}
-                    </div>
-                    <div>{removeSpot}</div>
                     </>
             </div>
             )}

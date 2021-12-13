@@ -1,0 +1,13 @@
+.signUpInfo {
+    display: grid;
+    grid-template-columns: 200px 200px;
+    grid-gap: 5px;
+    justify-content: center;
+    text-align: left;
+    margin-top: 50px;
+}
+
+.signUpButton {
+    margin-top: 25px;
+    text-align: center;
+}
