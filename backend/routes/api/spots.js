@@ -34,18 +34,26 @@ router.get('/:id(\\d+)', restoreUser, asyncHandler(async (req, res, next) => {
 
 router.post('/',requireAuth, spotValidator, asyncHandler( async(req, res, next) => {
   const spot = await Spot.create(req.body)
-  return res.json(spot)
-
+  const place = await Spot.findByPk(spot.id, {include: User})
+  return res.json(place)
 }))
 
-router.delete('/:id', requireAuth, asyncHandler(async (req, res, next) => {
+router.put('/:id(\\d+)', restoreUser, spotValidator, asyncHandler(async (req, res, next) => {
+  const spot = await Spot.findByPk(req.params.id)
+  const editSpot = await spot.update(req.body)
+  return res.json(editSpot)
+}))
+
+
+router.delete('/:id(\\d+)', requireAuth, asyncHandler(async (req, res, next) => {
   const { user } = req;
   const spotId = req.params.id;
 
   if (user) {
     const deleteSpot = await Spot.findByPk(spotId);
     await deleteSpot.destroy();
-    return res.json({});
+    const all = await Spot.findAll({include: User});
+    return res.json(all);
   }
 }))
 

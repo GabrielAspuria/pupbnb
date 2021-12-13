@@ -1,5 +1,4 @@
 import { csrfFetch } from "./csrf";
-import { Redirect } from "react-router-dom";
 
 const GET_ALL = 'spots/GET_ALL'
 const GET_SPOT = 'spot/GET_SPOT'
@@ -22,14 +21,14 @@ const addOneSpot = (spot) => ({
     spot
 })
 
-// const edit = (edit) => ({
-//     type: EDIT_SPOT,
-//     edit
-// })
+const edit = (edit) => ({
+    type: EDIT_SPOT,
+    edit
+})
 
-const remove = (remove) => ({
+const remove = (id) => ({
     type: DELETE_SPOT,
-    remove
+    id
 })
 
 export const getSpots = () => async (dispatch) => {
@@ -55,9 +54,6 @@ export const getSpot = (id) => async (dispatch) => {
 export const addSpot = (data) => async (dispatch) => {
     const res = await csrfFetch(`/api/spots`, {
         method: "POST",
-        headers: {
-            'Content-Type': 'application/json'
-          },
         body: JSON.stringify(data)
     })
 
@@ -68,12 +64,25 @@ export const addSpot = (data) => async (dispatch) => {
     }
 }
 
+export const editSpot = (id,data) => async (dispatch) => {
+    const res = await csrfFetch(`/api/spots/${id}`, {
+    method: 'PUT',
+    headers: {
+        'Content-Type' : 'applicaton/json'
+    },
+    body: JSON.stringify(data)
+    })
+    if (res.ok) {
+        const updatedSpot = await res.json()
+        dispatch(edit(updatedSpot))
+        return updatedSpot
+    }
+}
+
 export const deleteSpot = (id) => async (dispatch) => {
     const res = await csrfFetch(`/api/spots/${id}`, {method: 'DELETE'})
-
-    const spot = await res.json()
     if (res.ok) {
-        dispatch(remove(spot))
+        dispatch(remove(id))
     }
 }
 
@@ -102,7 +111,7 @@ export default function spotReducer(state = {}, action) {
         }
 
         case DELETE_SPOT:{
-            delete newState[action.remove.id]
+            delete newState[action.id]
             return newState;
         }
 
