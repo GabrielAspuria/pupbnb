@@ -57,7 +57,7 @@ export const editReview = (id, data) => async (dispatch) => {
 }
 
 export default function reviewReducer(state={}, action) {
-    const newState = {...state};
+    const newState = {};
     switch(action.type){
         case GET_ALL_REVIEWS:{
             action.reviews.forEach(review => {
@@ -66,8 +66,9 @@ export default function reviewReducer(state={}, action) {
             return newState;
         }
         case ADD_REVIEW:{
-            newState [action.addOne.id] = action.addOne
-            return newState
+            // newState [action.addOne.id] = action.addOne
+            // return newState
+            return { ...state, [action.addOne.id]: action.addOne}
         }
         case EDIT_REVIEW:{
             newState[action.edit.id] = action.edit;
