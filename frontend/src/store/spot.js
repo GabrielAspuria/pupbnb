@@ -22,10 +22,10 @@ const addOneSpot = (spot) => ({
     spot
 })
 
-// const edit = (edit) => ({
-//     type: EDIT_SPOT,
-//     edit
-// })
+const edit = (edit) => ({
+    type: EDIT_SPOT,
+    edit
+})
 
 const remove = (remove) => ({
     type: DELETE_SPOT,
@@ -65,6 +65,21 @@ export const addSpot = (data) => async (dispatch) => {
         const newSpot = await res.json();
         dispatch(addOneSpot(newSpot));
         return res
+    }
+}
+
+export const editSpot = (id,data) => async (dispatch) => {
+    const res = await csrfFetch(`/api/spots/${id}`, {
+    method: 'PUT',
+    headers: {
+        'Content-Type' : 'applicaton/json'
+    },
+    body: JSON.stringify(data)
+    })
+    if (res.ok) {
+        const updatedSpot = await res.json()
+        dispatch(edit(updatedSpot))
+        return updatedSpot
     }
 }
 

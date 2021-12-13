@@ -5,7 +5,6 @@ const db = require('../../db/models')
 const { Spot, User, Review } = db
 const { restoreUser, requireAuth} = require("../../utils/auth")
 const { handleValidationErrors } = require('../../utils/validation')
-// const { json } = require('sequelize/types')
 
 
 const router = express.Router();
@@ -34,8 +33,8 @@ router.get('/:id(\\d+)', restoreUser, asyncHandler(async (req, res, next) => {
 
 router.post('/',requireAuth, spotValidator, asyncHandler( async(req, res, next) => {
   const spot = await Spot.create(req.body)
-  return res.json(spot)
-
+  const place = await Spot.findByPk(spot.id, {include: User})
+  return res.json(place)
 }))
 
 router.delete('/:id', requireAuth, asyncHandler(async (req, res, next) => {
@@ -45,7 +44,8 @@ router.delete('/:id', requireAuth, asyncHandler(async (req, res, next) => {
   if (user) {
     const deleteSpot = await Spot.findByPk(spotId);
     await deleteSpot.destroy();
-    return res.json({});
+    const all = await Spot.findAll({include: User});
+    return res.json(all);
   }
 }))
 
