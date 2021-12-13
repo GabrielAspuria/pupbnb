@@ -36,7 +36,7 @@ router.get('/:id(\\d+)', restoreUser, asyncHandler(async (req, res, next) => {
   const { spot } = req;
   const spotId = req.params.id
 
-  const place = await Spot.findByPk(spotId, {include: User})
+  const place = await Spot.findByPk(spotId, {include: User, Review})
   return res.json(place)
 }))
 

@@ -65,8 +65,6 @@ export const addSpot = (data) => async (dispatch) => {
 }
 
 export const editSpot = (id,data) => async (dispatch) => {
-    console.log(id, "ID")
-    console.log(data, "DATA")
     const res = await csrfFetch(`/api/spots/${id}`, {
     method: 'PUT',
     body: JSON.stringify(data)

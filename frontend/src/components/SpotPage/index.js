@@ -5,6 +5,7 @@ import { useParams, Redirect, useHistory} from 'react-router-dom';
 import { getSpot, deleteSpot, editSpot } from '../../store/spot';
 import * as sessionActions from '../../store/session'
 import EditSpotForm from '../SpotPage(edit)';
+import ReviewForm from '../ReviewForm/Index';
 
 function SpotPage() {
     const dispatch = useDispatch();
@@ -82,6 +83,9 @@ function SpotPage() {
                     <div>{spot.description}</div>
                     {features}
                     <div>Reviews:</div>
+                    <div>
+                    <ReviewForm />
+                    </div>
                     <div>
                         {editASpot}
                         {editForm}
