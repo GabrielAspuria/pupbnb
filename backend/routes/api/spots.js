@@ -15,6 +15,15 @@ const spotValidator = [
     .withMessage('Name your spot!')
     .isLength({max: 255})
     .withMessage('Name too long'),
+  check('description')
+    .exists({checkFalsy: true})
+    .withMessage('Add a description!'),
+  check('features')
+    .exists({checkFalsy: true})
+    .withMessage('Add 3 features!'),
+  check('price')
+    .exists({checkFalsy: true})
+    .withMessage('Add price!'),
   handleValidationErrors
 ]
 
@@ -37,6 +46,12 @@ router.post('/',requireAuth, spotValidator, asyncHandler( async(req, res, next) 
   return res.json(place)
 }))
 
+router.put('/:id(\\d+)', restoreUser, spotValidator, asyncHandler(async (req, res, next) => {
+  const spot = await Spot.findByPk(req.params.id)
+  await spot.update(req.body)
+  const newSpot = await Spot.findByPk(req.params.id, {include: User})
+  return res.json(newSpot)
+}))
 
 router.delete('/:id(\\d+)', requireAuth, asyncHandler(async (req, res, next) => {
   const { user } = req;

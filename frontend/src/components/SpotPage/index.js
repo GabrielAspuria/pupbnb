@@ -31,8 +31,8 @@ function SpotPage() {
 
     const handleEdit = (id) => {
         setForm(true)
-        dispatch(editSpot(id))
-        history.push(`/spots/${id}`)
+        // dispatch(editSpot(id))
+        // history.push(`/spots/${id}`)
     }
 
     const sessionUser = useSelector((state) => state.session.user)

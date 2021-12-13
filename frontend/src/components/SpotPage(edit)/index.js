@@ -31,7 +31,7 @@ const EditSpotForm = () => {
             photos
         }
 
-        dispatch(editSpot(payload))
+        dispatch(editSpot(id, payload))
     }
 
     return (
