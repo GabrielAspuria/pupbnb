@@ -55,7 +55,7 @@ function SpotPage() {
 
     if (!spot) return null;
 
-    if (sessionUser.id === spot.userId) {
+    if ((sessionUser) && sessionUser.id === spot.userId) {
         removeSpot = (
             <>
             <button className='button' onClick={() => handleDelete(id) }>Delete</button>
@@ -69,7 +69,7 @@ function SpotPage() {
     }
 
     let editASpot;
-    if (sessionUser.id === spot.userId) {
+    if ((sessionUser) && sessionUser.id === spot.userId) {
         editASpot = (
             <>
                 <button className='button' onClick={() => handleEdit(id)}>Edit</button>
@@ -83,7 +83,7 @@ function SpotPage() {
     }
 
     let addReview;
-    if (sessionUser.id) {
+    if ((sessionUser) && sessionUser.id) {
         addReview = (
             <>
                 <button className='button' onClick={() => handleReview()}>Add Review</button>
