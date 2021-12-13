@@ -17,7 +17,6 @@ function SpotPage() {
 
     const spot = useSelector((state) => state.spot[id]);
     const review = useSelector((state) => state.review[id])
-    console.log(review)
 
     const [isLoaded, setIsLoaded] = useState(false);
     const [form, setForm] = useState(false)

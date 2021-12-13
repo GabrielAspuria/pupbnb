@@ -8,7 +8,6 @@ const EditReviewForm = () => {
     const dispatch = useDispatch();
     const {id} = useParams()
     const review = useSelector((state) => state.review)
-    console.log(review, "REVIEW")
     const sessionUser = useSelector(state => state.session.user.id);
 
     const [cleanliness, setCleanliness] = useState(review.cleanliness || 1)
