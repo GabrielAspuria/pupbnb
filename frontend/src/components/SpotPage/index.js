@@ -6,6 +6,7 @@ import { getSpot, deleteSpot, editSpot } from '../../store/spot';
 import * as sessionActions from '../../store/session'
 import EditSpotForm from '../SpotPage(edit)';
 import ReviewForm from '../ReviewForm/Index';
+import AddReviewForm from '../Review(create)/Index';
 
 function SpotPage() {
     const dispatch = useDispatch();
@@ -32,8 +33,10 @@ function SpotPage() {
 
     const handleEdit = (id) => {
         setForm(true)
-        // dispatch(editSpot(id))
-        // history.push(`/spots/${id}`)
+    }
+
+    const handleReview = () => {
+        setForm(true)
     }
 
     const sessionUser = useSelector((state) => state.session.user)
@@ -64,6 +67,19 @@ function SpotPage() {
         )
     }
 
+    let addReviewForm = null;
+    if (form) {
+        addReviewForm = <AddReviewForm />
+    }
+
+    let addReview;
+    if (sessionUser) {
+        addReview = (
+            <>
+                <button className='button' onClick={() => handleReview()}>Add Review</button>
+            </>
+        )
+    }
 
     if (!sessionUser) return <Redirect to='/'/>
 
@@ -85,6 +101,10 @@ function SpotPage() {
                     <div>Reviews:</div>
                     <div>
                     <ReviewForm />
+                    </div>
+                    <div>
+                        {addReview}
+                        {addReviewForm}
                     </div>
                     <div>
                         {editASpot}

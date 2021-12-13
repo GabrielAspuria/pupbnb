@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, Redirect, useHistory} from 'react-router-dom';
 import { getAllReviews} from '../../store/review';
-import * as sessionActions from '../../store/session'
 
 function ReviewForm() {
     const dispatch = useDispatch();
@@ -23,7 +22,6 @@ function ReviewForm() {
 
     const reviews = useSelector((state) => state.review)
 
-    console.log(reviews, "REVIEW INFO")
     if (!reviews || !id) return null
 
 

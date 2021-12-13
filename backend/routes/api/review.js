@@ -16,17 +16,23 @@ const reviewValidator = [
 ]
 
 router.get('/:id(\\d+)', restoreUser, asyncHandler(async (req, res, next) => {
-    // const { spot } = req;
     const spotId = req.params.id
 
     const allReviews = await Review.findAll({where: {spotId}})
     return res.json(allReviews)
 }))
 
-router.post('/:id(\\d+)', requireAuth, reviewValidator, asyncHandler(async (req, res, next) => {
+router.post('/', requireAuth, reviewValidator, asyncHandler(async (req, res, next) => {
     const review = await Review.create(req.body)
     const singleReview = await Review.findByPk(review.id, {include: User, Spot})
     return res.json(singleReview)
+}))
+
+router.put('/:id(\\d+)', restoreUser, reviewValidator, asyncHandler(async (req, res, next) => {
+    const review = await Review.findByPk(req.params.id)
+    await review.update(req.body)
+    const newReview = await Review.findByPk(req.params.id, {include: Spot, User})
+    return res.json(newReview)
 }))
 
 module.exports = router

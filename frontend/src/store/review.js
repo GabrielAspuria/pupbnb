@@ -4,6 +4,8 @@ const ADD_REVIEW = 'review/addReview'
 const GET_ALL_REVIEWS = 'review/getAll'
 const GET_SPOT = 'spot/GET_SPOT'
 
+// Actions
+
 const getAll = (reviews) => ({
     type: GET_ALL_REVIEWS,
     reviews
@@ -14,6 +16,8 @@ const add = (addOne) => ({
     addOne
 })
 
+//
+
 export const getAllReviews = (id) =>  async (dispatch) => {
     const res = await csrfFetch(`/api/reviews/${id}`)
     if (res.ok) {
@@ -22,8 +26,8 @@ export const getAllReviews = (id) =>  async (dispatch) => {
     }
 }
 
-export const addSpot = (id, data) => async (dispatch) => {
-    const res = await csrfFetch(`/api/reviews/${id}`, {
+export const addReview = (data) => async (dispatch) => {
+    const res = await csrfFetch(`/api/reviews`, {
         method: "POST",
         body: JSON.stringify(data)
     })
@@ -39,17 +43,15 @@ export default function reviewReducer(state={}, action) {
     const newState = {};
     switch(action.type){
         case GET_ALL_REVIEWS:{
-            console.log(action, "ACTION")
             action.reviews.forEach(review => {
                 newState[review.id] = review;
             })
-            console.log(newState, "NEWSTATE")
             return newState;
         }
-    //     case ADD_REVIEW:{
-    //         newState(action.payload.id) = action.payload
-    //         return newState
-    //     }
+        case ADD_REVIEW:{
+            newState [action.addOne.id] = action.addOne
+            return newState
+        }
         default:
             return state;
     }
