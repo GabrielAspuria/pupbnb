@@ -69,11 +69,12 @@ function LoginFormPage() {
                 />
             </div>
         </div>
-      </form>
+
       <div className='loginButtons'>
         <button onClick={handleDemo}>DEMO</button>
         <button type="submit">Log In</button>
       </div>
+      </form>
     </>
   );
 }
