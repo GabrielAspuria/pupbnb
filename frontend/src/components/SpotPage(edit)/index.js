@@ -36,26 +36,36 @@ const EditSpotForm = () => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <label>
-                Name:
-                <input placeholder='name' value={name} onChange={(e) => setName(e.target.value)}></input>
-            </label>
-            <label>
-                Description:
-                <input placeholder='description' value={description} onChange={(e) => setDescription(e.target.value)}></input>
-            </label>
-            <label>
-                Features:
-                <input placeholder='features' value={features} onChange={(e) => setFeatures(e.target.value)}></input>
-            </label>
-            <label>
-                Price:
-                <input placeholder='price' value={price} onChange={(e) => setPrice(e.target.value)}></input>
-            </label>
-            <label>
-                Photo:
-                <input placeholder='photo' value={photos} onChange={(e) => setPhotos(e.target.value)}></input>
-            </label>
+            <div>
+                <label>
+                    Name:
+                    <input placeholder='name' value={name} onChange={(e) => setName(e.target.value)}></input>
+                </label>
+            </div>
+            <div>
+                <label>
+                    Description:
+                    <textarea placeholder='description' value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
+                </label>
+            </div>
+            <div>
+                <label>
+                    Features:
+                    <input placeholder='features' value={features} onChange={(e) => setFeatures(e.target.value)}></input>
+                </label>
+            </div>
+            <div>
+                <label>
+                    Price:
+                    <input placeholder='price' value={price} onChange={(e) => setPrice(e.target.value)}></input>
+                </label>
+            </div>
+            <div>
+                <label>
+                    Photo:
+                    <input placeholder='photo' value={photos} onChange={(e) => setPhotos(e.target.value)}></input>
+                </label>
+            </div>
             <button>Submit</button>
         </form>
     )

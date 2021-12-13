@@ -7,6 +7,7 @@ import * as sessionActions from '../../store/session'
 import EditSpotForm from '../SpotPage(edit)';
 import ReviewForm from '../ReviewForm/Index';
 import AddReviewForm from '../Review(create)/Index';
+import EditReviewForm from '../Review(edit)/Index';
 
 function SpotPage() {
     const dispatch = useDispatch();
@@ -14,9 +15,13 @@ function SpotPage() {
     const {id} = useParams()
 
     const spot = useSelector((state) => state.spot[id]);
+    const review = useSelector((state) => state.review[id])
+    console.log(review)
 
     const [isLoaded, setIsLoaded] = useState(false);
     const [form, setForm] = useState(false)
+    const [reviewForm, setReviewForm] = useState(false)
+    const [editRForm, setEditRForm] = useState(false)
 
     useEffect(() => {
         dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
@@ -36,7 +41,11 @@ function SpotPage() {
     }
 
     const handleReview = () => {
-        setForm(true)
+        setReviewForm(true)
+    }
+
+    const handleEditReview = () => {
+        setEditRForm(true)
     }
 
     const sessionUser = useSelector((state) => state.session.user)
@@ -68,15 +77,29 @@ function SpotPage() {
     }
 
     let addReviewForm = null;
-    if (form) {
+    if (reviewForm) {
         addReviewForm = <AddReviewForm />
     }
 
     let addReview;
-    if (sessionUser) {
+    if (sessionUser.id) {
         addReview = (
             <>
                 <button className='button' onClick={() => handleReview()}>Add Review</button>
+            </>
+        )
+    }
+
+    let editReviewForm = null;
+    if (editRForm) {
+        editReviewForm = <EditReviewForm />
+    }
+
+    let editReview;
+    if (sessionUser) {
+        editReview = (
+            <>
+                <button className='button' onClick={() => handleEditReview()}>Edit Review</button>
             </>
         )
     }
@@ -105,6 +128,10 @@ function SpotPage() {
                     <div>
                         {addReview}
                         {addReviewForm}
+                    </div>
+                    <div>
+                        {editReview}
+                        {editReviewForm}
                     </div>
                     <div>
                         {editASpot}
