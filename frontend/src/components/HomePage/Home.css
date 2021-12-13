@@ -19,10 +19,16 @@
     /* border: 2px black solid; */
     display:flex;
     margin:auto;
-    width: 600px;
+    width: 700px;
     height: 200px;
     justify-content: center;
     font-family: 'Quicksand', sans-serif;
+}
+
+#github {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
 }
 
 html {
