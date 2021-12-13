@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory } from 'react-router-dom'
 import { addSpot } from '../../store/spot'
 
 const CreateSpot = () => {
     const dispatch = useDispatch();
-    const history = useHistory();
     const sessionUser = useSelector(state => state.session.user.id);
 
     const [name, setName] = useState('')

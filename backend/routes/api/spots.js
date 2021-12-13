@@ -37,7 +37,8 @@ router.post('/',requireAuth, spotValidator, asyncHandler( async(req, res, next) 
   return res.json(place)
 }))
 
-router.delete('/:id', requireAuth, asyncHandler(async (req, res, next) => {
+
+router.delete('/:id(\\d+)', requireAuth, asyncHandler(async (req, res, next) => {
   const { user } = req;
   const spotId = req.params.id;
 

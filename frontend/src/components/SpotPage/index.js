@@ -41,7 +41,7 @@ function SpotPage() {
 
     if (!spot) return null;
 
-    if (sessionUser.id == spot.userId) {
+    if (sessionUser.id === spot.userId) {
         removeSpot = (
             <>
             <button className='button' onClick={() => handleDelete(id) }>Delete</button>
