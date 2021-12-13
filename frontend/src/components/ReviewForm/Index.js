@@ -44,7 +44,22 @@ function ReviewForm() {
 
         <li>
             <div>
+                Cleanliness: {review.cleanliness}
+            </div>
+            <div>
+                Accuracy: {review.accuracy}
+            </div>
+            <div>
+                Communication: {review.communication}
+            </div>
+            <div>
+                Value: {review.value}
+            </div>
+            <div>
                 Experience: {review.experience}
+            </div>
+            <div>
+                Image: <img src={review.imgUrl}></img>
             </div>
         </li>
         )}
